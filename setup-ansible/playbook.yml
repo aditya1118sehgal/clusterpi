@@ -6,19 +6,21 @@
     #wifi:
       #ssid: "enter ssid"
       #password: enter password
-    packages_to_install: [ git, node, npm, python, vim ]
+    install_pkgs: [ git, node, npm, python, vim ]
     #pip_packages_to_install: [ awscli ]
     #npm_packages_to_install: [  ]
     update_cache: no
-  sudo: yes
+  become: yes
   tasks:
     #- name: configure wifi
     #  template: src=templates/wpa_supplicant.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf
     #  notify: reboot
 
     - name: install packages
-      apt: pkg={{ item }} state=installed update_cache={{ update_cache }}
-      with_items: packages_to_install
+      apt:
+        pkg: "{{ item }}"
+        state: latest
+      with_items: "{{ install_pkgs }}"
 
     #- name: install python modules with pip
     #  pip: name={{ item }}
