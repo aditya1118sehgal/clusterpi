@@ -6,9 +6,10 @@
     #wifi:
       #ssid: "enter ssid"
       #password: enter password
-    install_pkgs: [ git, node, npm, python, vim ]
+    install_pkgs: [ git, nodejs, npm, python, vim ]
     #pip_packages_to_install: [ awscli ]
     #npm_packages_to_install: [  ]
+    #install_npm_pkgs: [ homebridge homebridge-config-ui-x ]
     update_cache: no
   become: yes
   tasks:
@@ -29,6 +30,11 @@
     #- name: install node.js packages with npm
     #  npm: name={{ item }} global=yes
     #  with_items: npm_packages_to_install
+
+    #- name: Install "homebridge" globally
+    #  npm:
+    #    name: homebridge
+    #    global: yes
 
   handlers:
     - name: reboot
